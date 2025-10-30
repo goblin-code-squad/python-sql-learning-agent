@@ -13,7 +13,7 @@ def explain_code(code, filename):
         "1. Code Explanation\n2. Suggested Exercises\n3. Recommended Documentation\n\n"
         f"---\n{code}\n---"
     )
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an assistant that helps users learn Python and SQL by explaining code, suggesting exercises, and recommending documentation. Always reply in English."},
