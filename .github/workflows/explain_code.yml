@@ -23,7 +23,7 @@ jobs:
 
       - name: Run explain_code.py
         env:
-          OPENAI_API_KEY: ${{ secrets.OPEN_API_KEY }}
+          OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
         run: python explain_code.py
 
       - name: Create issue with AI explanations
