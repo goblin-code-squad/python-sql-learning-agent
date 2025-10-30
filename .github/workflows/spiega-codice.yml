@@ -1,0 +1,33 @@
+name: AI Code Helper for Python & SQL
+
+on:
+  push:
+    paths:
+      - '**/*.py'
+      - '**/*.sql'
+
+jobs:
+  explain-and-suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install openai
+
+      - name: Run explain_code.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python explain_code.py
+
+      - name: Create issue with AI explanations
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "AI Code Explanations, Exercises & Documentation"
+          content-filepath: ai_explanations.txt
