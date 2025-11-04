@@ -1,4 +1,4 @@
-name: AI Code Helper for Python & SQL
+name: Deepseek AI Code Helper for Python & SQL (function-calling)
 
 on:
   push:
@@ -19,15 +19,17 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install openai
+        run: pip install requests
 
       - name: Run explain_code.py
         env:
-          OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # Optional: set a custom endpoint if required by your Deepseek account
+          DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT }}
         run: python explain_code.py
 
       - name: Create issue with AI explanations
         uses: peter-evans/create-issue-from-file@v4
         with:
-          title: "AI Code Explanations, Exercises & Documentation"
+          title: "Deepseek AI Explanations, Exercises & Documentation"
           content-filepath: ai_explanations.txt
